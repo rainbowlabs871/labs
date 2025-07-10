@@ -744,66 +744,267 @@
     </section>
 
     <!-- Testimonials -->
-    <section id="testimonials" class="testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h2>Patient Testimonials</h2>
-                <p>What our patients say about us</p>
-            </div>
-            <div class="testimonial-container">
-                <div class="testimonial">
-                    <p class="testimonial-text">"Rainbow Laboratories has been our family's diagnostic partner for years. Their home collection service is extremely convenient, and reports are always accurate and delivered on time. Highly recommended for their professionalism and service quality."</p>
-                    <div class="testimonial-author">
-                    
-                        <div>
-                            <h4>Rajesh Kumar</h4>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial">
-                    <p class="testimonial-text">"I recently took the Complete Health Check package, and I must say I'm impressed with the thoroughness of the tests and the detailed report. The staff was courteous, and the doctor took time to explain my results. Truly a patient-first approach!"</p>
-                    <div class="testimonial-author">
-                        
-                        <div>
-                            <h4>Priya Sharma</h4>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial">
-                    <p class="testimonial-text">"Best Pathologist Dr. in Panipat.One of the best laboratory in Panipat. Advanced technology and quick report on time."</p>
-                    <div class="testimonial-author">
-                        
-                        <div>
-                            <h4>Vivek Kumar</h4>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial">
-                    <p class="testimonial-text">"Rainbow Laboratories is one of the most efficient laboratories in Panipat. I appreciate their quick report delivery and advanced technology."</p>
-                    <div class="testimonial-author">
-                        
-                        <div>
-                            <h4>"Blum" Google Review 2025</h4>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial">
-                    <p class="testimonial-text">"Best laboratory in Panipat and best results with short time of reporting, Nice staff"</p>
-                    <div class="testimonial-author">
-                        
-                        <div>
-                            <h4>Anuj Chaliya</h4>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
+<section id="testimonials" class="testimonials">
+    <div class="container">
+        <div class="section-title">
+            <h2>Patient Testimonials</h2>
+            <p>What our patients say about us</p>
         </div>
-    </section>
+        <div class="testimonial-slider-wrapper">
+            <button class="testimonial-arrow left" aria-label="Previous testimonial">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="testimonial-slider" id="testimonialSlider">
+                <div class="testimonial-slide active">
+                    <div class="testimonial">
+                        <p class="testimonial-text">"Rainbow Laboratories has been our family's diagnostic partner for years. Their home collection service is extremely convenient, and reports are always accurate and delivered on time. Highly recommended for their professionalism and service quality."</p>
+                        <div class="testimonial-author">
+                            <div>
+                                <h4>Rajesh Kumar</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="testimonial">
+                        <p class="testimonial-text">"I recently took the Complete Health Check package, and I must say I'm impressed with the thoroughness of the tests and the detailed report. The staff was courteous, and the doctor took time to explain my results. Truly a patient-first approach!"</p>
+                        <div class="testimonial-author">
+                            <div>
+                                <h4>Priya Sharma</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="testimonial">
+                        <p class="testimonial-text">"Best Pathologist Dr. in Panipat.One of the best laboratory in Panipat. Advanced technology and quick report on time."</p>
+                        <div class="testimonial-author">
+                            <div>
+                                <h4>Vivek Kumar</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="testimonial">
+                        <p class="testimonial-text">"Rainbow Laboratories is one of the most efficient laboratories in Panipat. I appreciate their quick report delivery and advanced technology."</p>
+                        <div class="testimonial-author">
+                            <div>
+                                <h4>"Blum" Google Review 2025</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="testimonial">
+                        <p class="testimonial-text">"Best laboratory in Panipat and best results with short time of reporting, Nice staff"</p>
+                        <div class="testimonial-author">
+                            <div>
+                                <h4>Anuj Chaliya</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="testimonial-arrow right" aria-label="Next testimonial">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        <div class="testimonial-dots" id="testimonialDots"></div>
+    </div>
+</section>
+
+<style>
+/* Testimonials Slider Styles */
+.testimonial-slider-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.testimonial-slider {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    min-height: 260px;
+    position: relative;
+}
+
+.testimonial-slide {
+    min-width: 100%;
+    transition: transform 0.5s cubic-bezier(.29,.61,.5,1), opacity 0.5s;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    display: flex;
+}
+
+.testimonial-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2;
+}
+
+.testimonial-arrow {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    z-index: 10;
+    margin: 0 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.testimonial-arrow:hover {
+    background: var(--primary-dark);
+    transform: scale(1.08);
+}
+
+.testimonial-arrow.left {
+    order: 0;
+}
+
+.testimonial-arrow.right {
+    order: 2;
+}
+
+.testimonial-slider {
+    order: 1;
+}
+
+.testimonial-dots {
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 28px;
+}
+
+.testimonial-dots button {
+    width: 12px;
+    height: 12px;
+    background: var(--gray);
+    border-radius: 50%;
+    border: none;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s;
+    outline: none;
+    padding: 0;
+}
+.testimonial-dots button.active {
+    background: var(--primary);
+    opacity: 1;
+}
+
+@media (max-width: 700px) {
+    .testimonial-slider-wrapper {
+        max-width: 98vw;
+        padding: 0 8px;
+    }
+    .testimonial-slider {
+        min-height: 200px;
+    }
+    .testimonial-arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonial-slider {
+        min-height: 130px;
+    }
+    .testimonial {
+        padding: 18px 10px;
+    }
+    .testimonial-author h4 {
+        font-size: 15px;
+    }
+}
+</style>
+
+<script>
+(function() {
+    // Testimonial slider logic
+    const slides = document.querySelectorAll('#testimonialSlider .testimonial-slide');
+    const dotsContainer = document.getElementById('testimonialDots');
+    const prevBtn = document.querySelector('.testimonial-arrow.left');
+    const nextBtn = document.querySelector('.testimonial-arrow.right');
+    const slider = document.getElementById('testimonialSlider');
+    let cur = 0, interval = null, hover = false;
+    const duration = 4000;
+
+    // generate dots
+    slides.forEach((_, i) => {
+        let btn = document.createElement('button');
+        btn.setAttribute('aria-label', 'Go to testimonial ' + (i+1));
+        if(i === 0) btn.classList.add('active');
+        btn.addEventListener('click', () => goToSlide(i, true));
+        dotsContainer.appendChild(btn);
+    });
+
+    const dots = dotsContainer.querySelectorAll('button');
+
+    function goToSlide(idx, manual = false) {
+        slides[cur].classList.remove('active');
+        dots[cur].classList.remove('active');
+        cur = idx;
+        slides[cur].classList.add('active');
+        dots[cur].classList.add('active');
+        if(manual) resetAuto();
+    }
+
+    function nextSlide(manual = false) {
+        let idx = (cur + 1) % slides.length;
+        goToSlide(idx, manual);
+    }
+    function prevSlide(manual = false) {
+        let idx = (cur - 1 + slides.length) % slides.length;
+        goToSlide(idx, manual);
+    }
+
+    function resetAuto() {
+        clearInterval(interval);
+        if(!hover) interval = setInterval(nextSlide, duration);
+    }
+
+    prevBtn.addEventListener('click', () => prevSlide(true));
+    nextBtn.addEventListener('click', () => nextSlide(true));
+
+    slider.addEventListener('mouseenter', () => {
+        hover = true;
+        clearInterval(interval);
+    });
+    slider.addEventListener('mouseleave', () => {
+        hover = false;
+        resetAuto();
+    });
+
+    // For mobile: allow pausing on touch
+    slider.addEventListener('touchstart', () => {
+        hover = true;
+        clearInterval(interval);
+    });
+    slider.addEventListener('touchend', () => {
+        hover = false;
+        resetAuto();
+    });
+
+    // Start auto-rotation
+    resetAuto();
+})();
+</script>
 
     <!-- FAQ Section -->
     <section id="faq">
