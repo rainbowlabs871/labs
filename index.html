@@ -485,6 +485,111 @@
         font-size: 15px;
     }
 }
+
+   /* Gallery Styles */
+        .gallery-section {
+            padding: 60px 0;
+            background: var(--light);
+        }
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .gallery-item {
+            flex: 0 1 240px;
+            max-width: 240px;
+            aspect-ratio: 4/3;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+            background: #fff;
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+            position: relative;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s cubic-bezier(.4,2,.55,.44);
+            display: block;
+        }
+        .gallery-item:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+        }
+        .gallery-item:focus {
+            outline: 2px solid var(--primary);
+        }
+
+        /* Modal Styles */
+        .gallery-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.9);
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s;
+        }
+        .gallery-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+        .gallery-modal-content {
+            max-width: 90vw;
+            max-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .gallery-modal-content img {
+            width: auto;
+            height: auto;
+            max-width: 90vw;
+            max-height: 80vh;
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+            animation: zoomIn 0.4s cubic-bezier(.4,2,.55,.44);
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.7);}
+            to   { transform: scale(1);}
+        }
+        .gallery-modal-close {
+            position: absolute;
+            top: -40px; right: 0;
+            color: #fff;
+            background: none;
+            border: none;
+            font-size: 34px;
+            cursor: pointer;
+        }
+        @media (max-width: 700px) {
+            .gallery-container {
+                gap: 12px;
+            }
+            .gallery-item {
+                flex-basis: 45vw;
+                max-width: 45vw;
+                min-width: 120px;
+            }
+        }
+        @media (max-width: 480px) {
+            .gallery-item {
+                flex-basis: 90vw;
+                max-width: 98vw;
+            }
+        }
         .faq-container {
             max-width: 800px;
             margin: 0 auto;
@@ -668,6 +773,7 @@
                     <li><a href="#packages">Health Packages</a></li>
                     <li><a href="#why-us">Why Choose Us</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li><a href="#book" class="btn">Book Appointment</a></li>
                 </ul>
@@ -1099,6 +1205,44 @@
 })();
 </script>
 
+<!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Gallery</h2>
+                <p>Take a look at our facilities and moments</p>
+            </div>
+            <div class="gallery-container">
+                <!-- GALLERY IMAGE PLACEHOLDER: 
+                Replace the sample src below with your images (e.g. gallery/photo1.jpg, gallery/photo2.jpg, etc.) 
+                Copy and paste more .gallery-item blocks as needed.
+                -->
+                <div class="gallery-item" tabindex="0">
+                    <img src="gallery/1.jpg" alt="Gallery image 1" />
+                </div>
+                <div class="gallery-item" tabindex="0">
+                    <img src="gallery/2.jpg" alt="Gallery image 2" />
+                </div>
+                <div class="gallery-item" tabindex="0">
+                    <img src="gallery/3.jpg" alt="Gallery image 3" />
+                </div>
+                <div class="gallery-item" tabindex="0">
+                    <img src="gallery/4.jpg" alt="Gallery image 4" />
+                </div>
+                <div class="gallery-item" tabindex="0">
+                    <img src="gallery/5.jpg" alt="Gallery image 5" />
+                </div>
+
+            </div>
+        </div>
+        <!-- Modal for zoomed image -->
+        <div class="gallery-modal" id="galleryModal">
+            <div class="gallery-modal-content">
+                <button class="gallery-modal-close" id="galleryModalClose" aria-label="Close">&#10005;</button>
+                <img src="" alt="Zoomed gallery" id="galleryModalImg">
+            </div>
+        </div>
+    </section>
     <!-- FAQ Section -->
     <section id="faq">
         <div class="container">
@@ -1248,6 +1392,7 @@
                         <li><a href="#packages">Health Packages</a></li>
                         <li><a href="#why-us">Why Choose Us</a></li>
                         <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
                         <li><a href="#faq">FAQs</a></li>
                         <li><a href="#contact">Contact Us</a></li>
                     </ul>
@@ -1318,6 +1463,41 @@
                     });
                 }
             });
+        });
+        // Gallery Modal Logic
+        const galleryItems = document.querySelectorAll('.gallery-item img');
+        const galleryModal = document.getElementById('galleryModal');
+        const galleryModalImg = document.getElementById('galleryModalImg');
+        const galleryModalClose = document.getElementById('galleryModalClose');
+        galleryItems.forEach(img => {
+            img.parentElement.addEventListener('click', function() {
+                galleryModalImg.src = img.src;
+                galleryModalImg.alt = img.alt;
+                galleryModal.classList.add('active');
+            });
+            img.parentElement.addEventListener('keypress', function(e) {
+                if (e.key === "Enter" || e.key === " ") {
+                    galleryModalImg.src = img.src;
+                    galleryModalImg.alt = img.alt;
+                    galleryModal.classList.add('active');
+                }
+            });
+        });
+        galleryModalClose.addEventListener('click', function() {
+            galleryModal.classList.remove('active');
+            galleryModalImg.src = "";
+        });
+        galleryModal.addEventListener('click', function(e) {
+            if (e.target === galleryModal) {
+                galleryModal.classList.remove('active');
+                galleryModalImg.src = "";
+            }
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === "Escape") {
+                galleryModal.classList.remove('active');
+                galleryModalImg.src = "";
+            }
         });
     </script>
 </body>
